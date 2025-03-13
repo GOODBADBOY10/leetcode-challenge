@@ -29,3 +29,51 @@
 // randomizedSet.remove(1); // Removes 1 from the set, returns true. Set now contains [2].
 // randomizedSet.insert(2); // 2 was already in the set, so return false.
 // randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom() will always return 2.
+
+
+class RandomizedSet {
+    constructor() {
+        this.valueIndex = new Map() // for storing the value and its index
+        this.values = [] // for storing the actual values
+    }
+
+    insert(val) {
+        if ( this.valueIndex.has(val) ) {
+            return false
+        }
+        this.valueIndex.set(val, this.values.length)
+        this.values.push(val)
+        return true;
+    };
+
+    remove(val) {
+        if(!this.valueIndex.has(val)) {
+            return false
+        }
+        // get the index of the value to be removed
+        const index = this.valueIndex.get(val)
+        const lastValue = this.values[this.values.length - 1];
+        //swap the elemet to be removed with the last element
+        this.values[index] = lastValue
+        this.valueIndex.set(lastValue, index)
+        // remove the last element
+        this.values.pop();
+        this.valueIndex.delete(val)
+        return true
+    };
+
+    getRandom() {
+        const randomIndex = Math.floor(Math.random() * this.values.length)
+        return this.values[randomIndex]
+    };
+}
+
+let randomizedSet = new RandomizedSet();
+
+console.log(randomizedSet.insert(1));  // Returns true
+console.log(randomizedSet.remove(2));  // Returns false
+console.log(randomizedSet.insert(2));  // Returns true
+console.log(randomizedSet.getRandom());  // Returns 1 or 2
+console.log(randomizedSet.remove(1));  // Returns true
+console.log(randomizedSet.insert(2));  // Returns false
+console.log(randomizedSet.getRandom());  // Returns 2

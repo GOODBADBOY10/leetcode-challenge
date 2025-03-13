@@ -1,3 +1,4 @@
+import { MeshBasicMaterial } from 'three'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 
@@ -9,7 +10,11 @@ function App() {
         <Canvas>
           <mesh>
             <boxGeometry args={[4, 4, 4]} />
-            <meshPhongMaterial />
+            {/* <sphereGeometry /> */}
+            {/* <octahedronGeometry args={[4, 4, 4]} /> */}
+            {/* <meshPhongMaterial /> */}
+            {/* <meshNormalMaterial /> */}
+            <meshBasicMaterial />
           </mesh>
           <ambientLight intensity={0.1} />
           <directionalLight position={[0, 0, 5]} color="green" />
