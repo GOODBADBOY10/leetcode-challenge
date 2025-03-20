@@ -22,16 +22,25 @@
 // The third child gets 1 candy because it satisfies the above two conditions.
 
 function candies(rating) {
-    let candy = 0
-    for ( let i = 0; i < rating.length; i++ ) {
-        rating[i] = candy
-        candy++
-        if ( rating[i] > rating[i + 1]) {
-            candy++
-        }
+    const candy = rating.length;
+    // console.log(candy);
+    if (candy === 1) return 1
+    let candies = new Array(candy).fill(1); 
+    for ( let i = 1; i < candy; i++ ) {
+        if (rating[i] > rating[i - 1]) {
+            candies[i] = candies[i - 1] + 1
+            // console.log(candies);
+        } 
     }
-    return candy;
+    for ( let i = candy - 2; i >= 0; i-- ) {
+        if (rating[i] > rating[i + 1]) {
+            candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+            console.log(candies);
+        } 
+    }
+    return candies.reduce((acc, cand) => acc + cand, 0);
 }
 
 const ratings = [1,2,2]
+// const ratings = [1,0,2]
 console.log(candies(ratings))
