@@ -9,8 +9,19 @@
 // Input: s = "axc", t = "ahbgdc"
 // Output: false
 
-
-function isSubsequence(s, t) {}
+// Use pointer
+function isSubsequence(s, t) {
+   let i = 0;
+   let j = 0;
+   while ( i < s.length && j < t.length) {
+    if ( s[i] === t[j] ) {
+        i++
+    }
+    j++
+   }
+   return i === s.length;
+}
 const s = "abc"
+// const s = "axc"
 const t = "ahbgdc"
 console.log(isSubsequence(s, t))
